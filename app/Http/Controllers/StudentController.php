@@ -21,6 +21,15 @@ class StudentController extends Controller
      */
     public function create()
     {
+        return view('students.create');
+    
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
         $request->validate([
             'nim' => 'required|unique:students,nim',
             'name' => 'required|string|max:255',
@@ -33,14 +42,6 @@ class StudentController extends Controller
 
         student::create($request->all());
         return redirect()->route('students.index');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
