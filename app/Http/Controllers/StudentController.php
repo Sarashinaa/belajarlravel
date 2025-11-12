@@ -21,7 +21,18 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        $request->validate([
+            'nim' => 'required|unique:students,nim',
+            'name' => 'required|string|max:255',
+            'gender' => 'required|string|max:10',   
+            'domisili' => 'nullable|string|max:255',
+            'angkatan' => 'required|digits:4',
+            'prodi' => 'required|string|max:255',
+            'fakultas' => 'required|string|max:255',
+        ]);
+
+        student::create($request->all());
+        return redirect()->route('students.index');
     }
 
     /**
